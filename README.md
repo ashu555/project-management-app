@@ -27,12 +27,18 @@ First start installs Composer/NPM dependencies, waits for MySQL, runs migrations
 | Vite (HMR) | http://localhost:5173 |
 | MySQL | `localhost:3306` |
 
-### 3. Log in (seeded user)
+## Log in (seeded users)
 
-| Field | Value |
-|-------|-------|
-| Email | `ashutosh@example.com` |
-| Password | `Ashu@123` |
+| Email | Password | Notes |
+|-------|----------|-------|
+| `ashutosh@example.com` | `Ashu@123` | Primary admin |
+| `priya.sharma@example.com` | `password` | Team member |
+| `rahul.mehta@example.com` | `password` | Team member |
+| `ananya.iyer@example.com` | `password` | Team member |
+| `vikram.singh@example.com` | `password` | Team member |
+
+Seeded data includes realistic projects such as Customer Portal Redesign, Mobile App Launch, and API Performance Hardening, with related tasks assigned across the team.
+
 
 ## Useful commands
 

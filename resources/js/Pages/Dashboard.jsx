@@ -16,7 +16,7 @@ export default function Dashboard({
     <AuthenticatedLayout
       user={auth.user}
       header={
-        <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 className="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
           Dashboard
         </h2>
       }
@@ -66,8 +66,8 @@ export default function Dashboard({
                 My Active Tasks
               </h3>
 
-              <table className="mt-3 w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
+              <table className="mt-3 w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-300">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100 border-b-2 border-gray-500">
                   <tr>
                     <th className="px-3 py-3">ID</th>
                     <th className="px-3 py-3">Project Name</th>
@@ -80,13 +80,19 @@ export default function Dashboard({
                   {activeTasks.data.map((task) => (
                     <tr key={task.id}>
                       <td className="px-3 py-2">{task.id}</td>
-                      <td className="px-3 py-2 text-white hover:underline">
-                        <Link href={route("project.show", task.project.id)}>
+                      <td className="px-3 py-2">
+                        <Link
+                          href={route("project.show", task.project.id)}
+                          className="text-white font-medium hover:underline"
+                        >
                           {task.project.name}
                         </Link>
                       </td>
-                      <td className="px-3 py-2 text-white hover:underline">
-                        <Link href={route("task.show", task.id)}>
+                      <td className="px-3 py-2">
+                        <Link
+                          href={route("task.show", task.id)}
+                          className="text-white font-medium hover:underline"
+                        >
                           {task.name}
                         </Link>
                       </td>

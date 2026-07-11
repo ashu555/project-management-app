@@ -57,8 +57,8 @@ export default function TasksTable({
         </div>
       )}
       <div className="overflow-auto">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-300">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100 border-b-2 border-gray-500">
             <tr className="text-nowrap">
               <TableHeading
                 name="id"
@@ -111,7 +111,7 @@ export default function TasksTable({
               <th className="px-3 py-3 text-right">Actions</th>
             </tr>
           </thead>
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100 border-b-2 border-gray-500">
             <tr className="text-nowrap">
               <th className="px-3 py-3"></th>
               <th className="px-3 py-3"></th>
@@ -154,11 +154,23 @@ export default function TasksTable({
                   <img src={task.image_path} style={{ width: 60 }} />
                 </td>
                 {!hideProjectColumn && (
-                  <td className="px-3 py-2">{task.project.name}</td>
+                  <td className="px-3 py-2">
+                  <Link
+                    href={route("project.show", task.project.id)}
+                    className="text-gray-900 dark:text-white font-medium hover:underline"
+                  >
+                    {task.project.name}
+                  </Link>
+                </td>
                 )}
-                <th className="px-3 py-2 text-gray-100 hover:underline">
-                  <Link href={route("task.show", task.id)}>{task.name}</Link>
-                </th>
+                <td className="px-3 py-2">
+                  <Link
+                    href={route("task.show", task.id)}
+                    className="text-gray-900 dark:text-white font-medium hover:underline"
+                  >
+                    {task.name}
+                  </Link>
+                </td>
                 <td className="px-3 py-2">
                   <span
                     className={

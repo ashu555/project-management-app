@@ -48,7 +48,7 @@ export default function Index({ auth, users, queryParams = null, success }) {
       user={auth.user}
       header={
         <div className="flex justify-between items-center">
-          <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+          <h2 className="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
             Users
           </h2>
           <Link
@@ -72,8 +72,8 @@ export default function Index({ auth, users, queryParams = null, success }) {
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-6 text-gray-900 dark:text-gray-100">
               <div className="overflow-auto">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
+                <table className="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-300">
+                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100 border-b-2 border-gray-500">
                     <tr className="text-nowrap">
                       <TableHeading
                         name="id"
@@ -113,7 +113,7 @@ export default function Index({ auth, users, queryParams = null, success }) {
                       <th className="px-3 py-3 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
+                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100 border-b-2 border-gray-500">
                     <tr className="text-nowrap">
                       <th className="px-3 py-3"></th>
                       <th className="px-3 py-3">
@@ -149,9 +149,9 @@ export default function Index({ auth, users, queryParams = null, success }) {
                         key={user.id}
                       >
                         <td className="px-3 py-2">{user.id}</td>
-                        <th className="px-3 py-2 text-gray-100 text-nowrap">
+                        <td className="px-3 py-2 text-gray-900 dark:text-white font-medium text-nowrap">
                           {user.name}
-                        </th>
+                        </td>
                         <td className="px-3 py-2">{user.email}</td>
                         <td className="px-3 py-2 text-nowrap">
                           {user.created_at}

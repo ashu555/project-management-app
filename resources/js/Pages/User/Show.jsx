@@ -7,7 +7,7 @@ export default function Show({ auth, user, tasks, queryParams }) {
     <AuthenticatedLayout
       user={auth.user}
       header={
-        <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 className="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
           {`User "${user.name}"`}
         </h2>
       }

@@ -30,7 +30,7 @@ export default function Create({ auth, task, projects, users }) {
       user={auth.user}
       header={
         <div className="flex justify-between items-center">
-          <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+          <h2 className="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
             Edit task "{task.name}"
           </h2>
         </div>
