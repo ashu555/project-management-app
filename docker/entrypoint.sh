@@ -8,8 +8,7 @@ if [ ! -f .env ]; then
     cp .env.example .env
 fi
 
-# Ensure Docker MySQL settings win over .env.example defaults (sqlite).
-# Container env vars already override at runtime; keep .env aligned for artisan/tinker.
+# Align .env with Docker MySQL service defaults.
 sed -i 's/^DB_CONNECTION=.*/DB_CONNECTION=mysql/' .env
 sed -i 's/^# DB_HOST=.*/DB_HOST=mysql/' .env
 sed -i 's/^DB_HOST=.*/DB_HOST=mysql/' .env
@@ -21,7 +20,12 @@ sed -i 's/^# DB_USERNAME=.*/DB_USERNAME=sail/' .env
 sed -i 's/^DB_USERNAME=.*/DB_USERNAME=sail/' .env
 sed -i 's/^# DB_PASSWORD=.*/DB_PASSWORD=password/' .env
 sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=password/' .env
-sed -i 's|^APP_URL=.*|APP_URL=http://localhost:8000|' .env
+
+if [ -z "${APP_URL}" ]; then
+    sed -i 's|^APP_URL=.*|APP_URL=http://localhost:8000|' .env
+else
+    sed -i "s|^APP_URL=.*|APP_URL=${APP_URL}|" .env
+fi
 
 if ! grep -q '^DB_HOST=' .env; then
     printf '\nDB_HOST=mysql\nDB_PORT=3306\nDB_DATABASE=project_management\nDB_USERNAME=sail\nDB_PASSWORD=password\n' >> .env
@@ -45,15 +49,18 @@ until php -r "new PDO(
 done
 echo "MySQL is ready."
 
+echo "Running migrations..."
 php artisan migrate --force
 
-if [ ! -f storage/app/.docker_seeded ]; then
-    echo "Seeding database..."
+USER_COUNT=$(php artisan tinker --execute="echo \\App\\Models\\User::count();" 2>/dev/null | tr -d '\r' | tail -n 1)
+if [ "${USER_COUNT}" = "0" ]; then
+    echo "Seeding database with sample users, projects, and tasks..."
     php artisan db:seed --force
-    touch storage/app/.docker_seeded
+else
+    echo "Database already has data (users=${USER_COUNT}); skipping seed."
 fi
 
 php artisan storage:link --force 2>/dev/null || true
 
-echo "App ready at http://localhost:8000"
+echo "App ready at ${APP_URL:-http://localhost:8000}"
 exec "$@"
